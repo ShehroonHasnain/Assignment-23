@@ -1,0 +1,28 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.feedlisting-container{
+    width: 95%;
+    background-color: #F5F5F7;
+    width: 95%;
+    background-color: rgba(245, 245, 247,0.9);
+ border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px ;
+    margin-top: 10px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    
+}
+.feedlisting-items{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    
+}
