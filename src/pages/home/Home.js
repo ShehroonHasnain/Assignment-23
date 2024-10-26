@@ -13,6 +13,9 @@ export default function Home() {
     <section className='center-layout'>
     <aside className='left-aside-layout'>
 <p>asid</p>
+<div className='left-aside-demo'>Aside Demo components </div>
+<div className='left-aside-demo'>Aside Demo components </div>
+<div className='left-aside-demo'>Aside Demo components </div>
     </aside>
     <main className='main-layout'>
     <CreatePost/>
@@ -20,6 +23,9 @@ export default function Home() {
     </main>
     <aside className='right-aside-layout'>
 <p>asid</p>
+<div className='right-aside-demo'>Aside Demo components </div>
+<div className='right-aside-demo'>Aside Demo components </div>
+<div className='right-aside-demo'>Aside Demo components </div>
     </aside>
     
     </section>
