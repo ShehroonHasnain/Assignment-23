@@ -22,15 +22,6 @@ export default function Login() {
     }
     return (
 
-        // <div>
-        //     <h1>Login Page</h1>
-        //     <input type="email" placeholder='Enter email' onChange={(e) => setEmail(e.target.value)} />
-        //     <br />
-        //     <input type="password" placeholder='Enter password' onChange={(e) => setPassword(e.target.value)} />
-        //     <button onClick={handleLogin}>Login</button>
-        //     <br />
-        //    <Link to="/signup"> <p>Create account.?</p></Link>
-        // </div>
         <div className='login-box'>
         <div className="login-container">
     <h1>Login Page</h1>

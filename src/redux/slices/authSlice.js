@@ -1,8 +1,10 @@
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "firebase/auth";
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { auth, db } from "../../config/firebase";
 import { addDoc ,doc, collection, getDoc, setDoc} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {  storage } from "../../config/firebase";
 
 
 
@@ -13,14 +15,25 @@ import { addDoc ,doc, collection, getDoc, setDoc} from "firebase/firestore";
 // currentUser auth
 export const getCurrentUser = createAsyncThunk(
     "auth/currentUser",
-    async ()=>{
+    async (setLoading, store)=>{
         try {
-            const user = auth.currentUser;
-            if (user) {
-                return user
-            }
-         
+            setLoading(true)
+            onAuthStateChanged(auth,async(user) => {
+                if (user) {
+                  const uid = user.uid;
+                  const docSnap = await getDoc(doc(db, "users",uid))
+                  const dbUser = docSnap?.data()
+                  store.dispatch(setUser(dbUser))
+                  console.log("dbUser",dbUser);
+                  setLoading(false)
+                } else{
+                    setLoading(false)
+                }
+              });
+              return 
         } catch (error) {
+            setLoading(false)
+            console.log(error);
             
         }
          
@@ -72,22 +85,42 @@ export const signup = createAsyncThunk(
     'auth/signup',
     async (user) => {
         try {
+            user.setLoading(true)
+           const file=user.file
+
+            // file referece
+
+            const fileRef = ref(storage, 'profileImages/' + parseInt(Math.random() * 23423425312) + file.name);
+            const metadata = {
+                contentType: file.type,
+              };
+            await uploadBytes(fileRef, file, metadata)
+            const url = await getDownloadURL(fileRef)
+            console.log("url",url);
+
+
            const userCredential = await createUserWithEmailAndPassword(auth, user.email, user.password)
             
            let saveUserTodb = {
                 email: user.email,
                 name: user.name,
+                profileURL:url,
                 phone: user.phone,
                 address: user.address,
                 gender: user.gender,
                 uid: userCredential.user.uid
            }
-
+           user.setLoading(false)
            await setDoc(doc(db, "users", userCredential.user.uid ), saveUserTodb)
-            return  saveUserTodb
+           
+           return saveUserTodb
+                
+            
+            
             
         } catch (error) {
             console.log("error", error);
+            user.setLoading(false)
             
         }
       

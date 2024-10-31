@@ -14,8 +14,12 @@ export default function Signup() {
     const [phone, setPhone] = useState("")
     const [address, setAddress] = useState("")
     const [ gender, setGender] = useState("")
+    const [profileURL,setProfileURL]= useState("")
+    const [file , setFile] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
+    
     
     
     const handleSignup = () => {
@@ -28,31 +32,22 @@ export default function Signup() {
             gender
         }
         console.log("Signup clicked",user);
-       dispatch(signup(user))    
+       dispatch(signup({...user,file,setLoading}))    
     }
+// profile pic url handle
 
+const changeImage = async (e) => {
+  console.log("e", e.target.files[0]);
+  const file = e.target.files[0];
+  setFile(file)
+
+
+
+}
 
   return (
-    // <div>
-    // <h1>Signup</h1>
-    // <input type="text" placeholder="email" onChange={(e)=> setEmail(e.target.value)}/>
-    // <br/>
-    // <input type="password" placeholder="password" onChange={(e)=> setPassword(e.target.value)}/>
-    // <br/>
-    // <input type="text" placeholder="name" onChange={(e)=> setName(e.target.value)}/>
-    // <br/>
-    // <input type="text" placeholder="phone" onChange={(e)=> setPhone(e.target.value)}/>
-    // <br/>
-    // <input type="text" placeholder="address" onChange={(e)=> setAddress(e.target.value)}/>
-    // <br/>
-    // <label>Male</label>
-    // <input type="radio" name="gender" value="male" onChange={()=> setGender("male")}/>
-    // <br/>
-    // <label>Female</label>
-    // <input type="radio" name="gender" value="female"  onChange={()=> setGender("female")} />
-    // <br/>
-    // <button onClick={handleSignup}>Signup</button>
-    // </div>
+ 
+    
 <div className='body'>
     <div className="container">
     <div className="signup-form"  >
@@ -65,6 +60,9 @@ export default function Signup() {
       
       <label htmlFor="password">Password</label>
       <input type="password" id="password" name="password" onChange={(e)=> setPassword(e.target.value)} required placeholder="Enter your password" minLength="6"/>
+     
+      <label htmlFor="file">Choose Profile Pic</label>
+     <input onChange={changeImage} type="file" id="file" required />
 
       <label htmlFor="phone">Phone</label>
       <input type="tel" id="phone" name="phone" onChange={(e)=> setPhone(e.target.value)} required placeholder="Enter your phone number" pattern="[0-9]{10}"/>
@@ -79,12 +77,12 @@ export default function Signup() {
             <input type="radio" name="gender" value="male" onChange={()=> setGender("male")} required/> Male
           </label>
           <label>
-            <input type="radio" name="gender" value="female"onChange={()=> setGender("female")}/> Female
+            <input type="radio" name="gender" value="female"onChange={()=> setGender("female")} required/> Female
           </label>
         </div>
       </div>
       
-      <button onClick={handleSignup}>Signup</button>
+      <button onClick={handleSignup}>{loading? <p>loading...</p>:<p>Signup</p>}</button>
     </div>
   </div>
   </div>

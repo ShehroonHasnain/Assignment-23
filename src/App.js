@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Routing from './routing/Routing'
+import { useDispatch } from 'react-redux'
+import { getCurrentUser } from './redux/slices/authSlice'
+import Navbar from './components/navbar/Navbar'
+
 
 export default function App() {
+  const [loading,setLoading]=useState(false)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getCurrentUser(setLoading))
+  },[])
+
   return (
     <div>
-    <Routing />
+    {loading ? <h1>Loading...</h1>:  
+    
+    <Routing />}
     </div>
   )
 }

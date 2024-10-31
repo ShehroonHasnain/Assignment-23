@@ -1,4 +1,4 @@
-/* Nav Bar */
+
 
 li {
     list-style: none;
@@ -22,7 +22,7 @@ header {
 .navbar {
     border-radius: 8px;
     background-color: rgba(245, 245, 247,0.9);
-    width: 95%;
+    width: 100%;
     height: 60px;
     max-width: 1200px;
     margin: 0 auto;
@@ -128,29 +128,3 @@ header {
   height: 100vh;
   background-color: transparent;
 }
-/* @media (max-width: 992px) {
-    .navbar .nav ul {
-        display: none;
-    }
-    
-    .navbar .menu {
-        display: flex;
-    }
-    
-    .navbar .menu i {
-        display: inline-block;
-    }
-    
-    .navbar .highlight {
-        display: none;
-    }
-    
-    .dropdown-menu {
-        display: block;
-    }
-    
-    .dropdown-menu .highlight {
-        display: block;
-        margin-top: 1rem;
-    }
-} */

@@ -79,6 +79,9 @@ export const createPost = createAsyncThunk(
             console.log("url",url);
             
             let updatedPost  = {
+                uid:post.uid,
+                userName:post.userName,
+                userProfileURL:post.userProfileURL,
                 title: post.title,
                 description: post.description,
                 createAt: new Date(),

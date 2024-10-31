@@ -1,0 +1,21 @@
+.rightSideBar-container{
+    display: flex;
+    flex-direction: column;
+    
+    height: auto;
+    width: 95%;
+    /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+}
+.rightSideBar-Items{
+    height: 200px;
+    width: 140%;
+    font-weight: 100;
+    font-size: 20px;
+    border-bottom: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+
+
+}

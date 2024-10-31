@@ -13,9 +13,14 @@ export default function CreatePost() {
     const [description, setDescription] = useState("");
     const [imageURL, setImageURL] = useState('');
     const [file, setFile] = useState('')
+    const [userName,setUserName] = useState('')
     const [loading, setLoading] = useState(false)
 
     const post = useSelector(store => store.feedSlice.updatePost)
+    const user = useSelector( store => store.authSlice.user)
+    // console.log('user',user);
+    
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -35,7 +40,14 @@ export default function CreatePost() {
     const createPostHandler = () => {
         console.log("Title: ", title);
         console.log("Description: ", description)
+        console.log('userName',userName);
+        
+        console.log("User id",user.uid);
+        
         let postData = {
+            uid: user.uid,
+            userName: user.name,
+            userProfileURL:user.profileURL,
             title,
             description,
             imageURL,
@@ -55,16 +67,7 @@ export default function CreatePost() {
         const file = e.target.files[0];
         setFile(file)
 
-        // console.log("file", file);
-
-        // const fileRef = ref(storage, 'images/' + parseInt(Math.random() * 23423425312) + file.name);
-        // const metadata = {
-        //     contentType: file.type,
-        // };
-        // await uploadBytes(fileRef, file, metadata)
-        // const url = await getDownloadURL(fileRef)
-        // console.log("url", url);
-        // setImageURL(url)
+    
 
     }
 
